@@ -9,6 +9,7 @@ import TreatmentsPage from './components/pages/TreatmentsPage';
 import AdminPage from './components/pages/AdminPage';
 import BookingModal from './components/BookingModal';
 import { Toaster } from './components/ui/sonner';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -58,8 +59,48 @@ export default function App() {
   // Dashboard mode - render only dashboard page without navigation/footer
   if (currentPage === 'dashboard-preview') {
     return (
-      <div className="min-h-screen">
+      <LanguageProvider>
+        <div className="min-h-screen">
+          {renderPage()}
+          <Toaster 
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: 'white',
+                color: '#374151',
+                border: '1px solid #f3f4f6',
+                fontSize: '14px'
+              }
+            }}
+          />
+        </div>
+      </LanguageProvider>
+    );
+  }
+
+  return (
+    <LanguageProvider>
+      <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-white">
+        {/* Always show navigation */}
+        <Navigation 
+          currentPage={currentPage} 
+          setCurrentPage={setCurrentPage} 
+          onBookNow={openBookingModal} 
+        />
+        
+        {/* Render the current page */}
         {renderPage()}
+        
+        {/* Always show footer */}
+        <Footer />
+
+        {/* Booking Modal - available on all pages */}
+        <BookingModal 
+          isOpen={isBookingModalOpen} 
+          onClose={closeBookingModal} 
+        />
+        
+        {/* Toast notifications */}
         <Toaster 
           position="top-center"
           toastOptions={{
@@ -72,42 +113,6 @@ export default function App() {
           }}
         />
       </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-white">
-      {/* Always show navigation */}
-      <Navigation 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
-        onBookNow={openBookingModal} 
-      />
-      
-      {/* Render the current page */}
-      {renderPage()}
-      
-      {/* Always show footer */}
-      <Footer />
-
-      {/* Booking Modal - available on all pages */}
-      <BookingModal 
-        isOpen={isBookingModalOpen} 
-        onClose={closeBookingModal} 
-      />
-      
-      {/* Toast notifications */}
-      <Toaster 
-        position="top-center"
-        toastOptions={{
-          style: {
-            background: 'white',
-            color: '#374151',
-            border: '1px solid #f3f4f6',
-            fontSize: '14px'
-          }
-        }}
-      />
-    </div>
+    </LanguageProvider>
   );
 }

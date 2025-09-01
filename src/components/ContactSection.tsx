@@ -1,12 +1,15 @@
 import ContactInfo from "./ContactInfo";
 import ContactMap from "./ContactMap";
 import SocialMedia from "./SocialMedia";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface ContactSectionProps {
   onNavigateToPage: (page: string) => void;
 }
 
 export default function ContactSection({ onNavigateToPage }: ContactSectionProps) {
+  const { t } = useLanguage();
+
   return (
     <div
       id="contacts"
@@ -18,7 +21,7 @@ export default function ContactSection({ onNavigateToPage }: ContactSectionProps
           {/* Section Title */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-700 mb-4 px-[0px] py-[13px]">
-              Contacts
+              {t('contact.title')}
             </h2>
           </div>
 

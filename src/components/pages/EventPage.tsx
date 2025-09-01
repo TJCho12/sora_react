@@ -1,7 +1,9 @@
-import { useState } from 'react';
+
+ import { useState } from 'react';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Button } from '../ui/button';
 import PageLayout from '../PageLayout';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 interface PromotionItem {
   id: number;
@@ -17,117 +19,94 @@ interface PromotionItem {
 }
 
 export default function EventPage() {
+  const { t } = useLanguage();
   const [selectedItem, setSelectedItem] = useState<PromotionItem | null>(null);
   const [clickedCard, setClickedCard] = useState<number | null>(null);
 
   const promotionItems: PromotionItem[] = [
     {
       id: 1,
-      title: 'Laser Hair Removal Package',
+      title: t('event.promo1.title'),
       category: 'laser treatment',
       discount: '40% OFF',
       originalPrice: '$800',
       promotionPrice: '$480',
-      validUntil: 'Valid until March 31, 2024',
+      validUntil: t('common.validUntil') + ' March 31, 2024',
       image: 'https://images.unsplash.com/photo-1593260853607-d0e0f639bdab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjBrb3JlYW4lMjB3b21hbiUyMHNraW5jYXJlfGVufDF8fHx8MTc1NjEwNjEyMnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Complete laser hair removal package for international patients. Premium IPL technology with guaranteed smooth, beautiful skin results.',
+      description: t('event.promo1.desc'),
       includes: ['6 Sessions Full Body', 'Free Consultation', 'Aftercare Products', 'English-speaking Staff']
     },
     {
       id: 2,
-      title: 'Botox Anti-Aging Treatment',
+      title: t('event.promo2.title'),
       category: 'injectable',
       discount: '30% OFF',
       originalPrice: '$600',
       promotionPrice: '$420',
-      validUntil: 'Valid until April 15, 2024',
+      validUntil: t('common.validUntil') + ' April 15, 2024',
       image: 'https://images.unsplash.com/photo-1722350766824-f8520e9676ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjB3b21hbiUyMGZhY2lhbCUyMHRyZWF0bWVudCUyMHNwYXxlbnwxfHx8fDE3NTYxMDYxMjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Professional Botox treatment for youthful, wrinkle-free skin. FDA-approved products with experienced Korean aesthetic doctors.',
+      description: t('event.promo2.desc'),
       includes: ['Forehead + Eyes + Frown Lines', 'Post-Treatment Care', '2-Week Follow-up', 'International Certification']
     },
     {
       id: 3,
-      title: 'Dermal Filler Enhancement',
+      title: t('event.promo3.title'),
       category: 'injectable',
       discount: '25% OFF',
       originalPrice: '$900',
       promotionPrice: '$675',
-      validUntil: 'Valid until March 20, 2024',
+      validUntil: t('common.validUntil') + ' March 20, 2024',
       image: 'https://images.unsplash.com/photo-1722350766824-f8520e9676ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjB3b21hbiUyMGZhY2lhbCUyMHRyZWF0bWVudCUyMHNwYXxlbnwxfHx8fDE3NTYxMDYxMjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Premium hyaluronic acid fillers for facial contouring and volume restoration with natural-looking Korean beauty results.',
+      description: t('event.promo3.desc'),
       includes: ['1ml Premium Filler', 'Face Mapping Analysis', 'Numbing Cream', 'Emergency Contact Support']
     },
     {
       id: 4,
-      title: 'Glass Skin Facial Package',
+      title: t('event.promo4.title'),
       category: 'facial treatment',
       discount: '35% OFF',
       originalPrice: '$400',
       promotionPrice: '$260',
-      validUntil: 'Valid until April 30, 2024',
+      validUntil: t('common.validUntil') + ' April 30, 2024',
       image: 'https://images.unsplash.com/photo-1593260853607-d0e0f639bdab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBiZWF1dHklMjBtb2RlbCUyMHNraW5jYXJlfGVufDF8fHx8MTc1NjEwNjEyOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Achieve the famous Korean "glass skin" look with our signature hydrating facial treatment perfect for achieving porcelain-like complexion.',
+      description: t('event.promo4.desc'),
       includes: ['3 Session Package', 'Korean Skincare Products', 'Home Care Kit', 'Skin Analysis Report']
     },
     {
       id: 5,
-      title: 'K-Beauty Glow Treatment',
+      title: t('event.promo5.title'),
       category: 'brightening',
       discount: '50% OFF',
       originalPrice: '$1200',
       promotionPrice: '$600',
-      validUntil: 'Valid until May 15, 2024',
+      validUntil: t('common.validUntil') + ' May 15, 2024',
       image: 'https://images.unsplash.com/photo-1581883556531-e5f8027f557f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHdvbWFuJTIwZ2xvd2luZyUyMHNraW58ZW58MXx8fHwxNzU2MTA2MTMyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Comprehensive K-beauty glow program combining LED therapy, vitamin C infusions, and Korean brightening techniques for luminous skin.',
+      description: t('event.promo5.desc'),
       includes: ['6-Month Treatment Plan', 'LED Light Therapy', 'Vitamin C Serums', 'Weekly Monitoring']
     },
     {
       id: 6,
-      title: 'Premium Skincare Routine',
+      title: t('event.promo6.title'),
       category: 'skincare',
       discount: '45% OFF',
       originalPrice: '$1500',
       promotionPrice: '$825',
-      validUntil: 'Valid until March 25, 2024',
+      validUntil: t('common.validUntil') + ' March 25, 2024',
       image: 'https://images.unsplash.com/photo-1710839465443-8671ced76e09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjB3b21hbiUyMHNraW5jYXJlJTIwcm91dGluZXxlbnwxfHx8fDE3NTYwMTk5Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Ultimate Korean beauty package combining multiple advanced treatments for comprehensive skin transformation and anti-aging.',
+      description: t('event.promo6.desc'),
       includes: ['Microneedling + PRP', 'Chemical Peel', 'Vitamin C Infusion', '3-Month Skincare Kit']
     },
     {
       id: 7,
-      title: 'Hydrating Beauty Boost',
+      title: t('event.promo7.title'),
       category: 'hydration',
       discount: '30% OFF',
-      originalPrice: '$350',
-      promotionPrice: '$245',
-      validUntil: 'Valid until April 10, 2024',
-      image: 'https://images.unsplash.com/photo-1593260853607-d0e0f639bdab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBnaXJsJTIwYmVhdXR5JTIwcHJvZHVjdHN8ZW58MXx8fHwxNzU2MTA2MTM2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Deep hydration treatment using Korean beauty secrets for plump, dewy skin that glows from within.',
-      includes: ['Hyaluronic Acid Therapy', 'Collagen Mask', 'Recovery Products', 'Follow-up Consultation']
-    },
-    {
-      id: 8,
-      title: 'Face Mask Therapy Special',
-      category: 'mask treatment',
-      discount: '40% OFF',
       originalPrice: '$500',
-      promotionPrice: '$300',
-      validUntil: 'Valid until March 28, 2024',
-      image: 'https://images.unsplash.com/photo-1670201203614-cdb9b8fdf4c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b3VuZyUyMHdvbWFuJTIwZmFjZSUyMG1hc2slMjB0cmVhdG1lbnR8ZW58MXx8fHwxNzU2MTA2MTM1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Luxurious face mask therapy using premium Korean ingredients for intensive skin repair and rejuvenation.',
-      includes: ['Professional Face Masks', 'Serum Infusion', 'Healing Treatment', 'Post-Care Instructions']
-    },
-    {
-      id: 9,
-      title: 'Beauty Consultation Package',
-      category: 'consultation',
-      discount: 'FREE',
-      originalPrice: '$150',
-      promotionPrice: '$0',
-      validUntil: 'Available Daily',
-      image: 'https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZWF1dGlmdWwlMjBhc2lhbiUyMG1vZGVsJTIwc3BhJTIwdHJlYXRtZW50fGVufDF8fHx8MTc1NjEwNjEzNnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Comprehensive beauty consultation with our Korean aesthetic specialists to create your personalized beauty transformation plan.',
-      includes: ['Detailed Skin Analysis', 'Treatment Plan', 'Product Recommendations', 'Multi-language Support']
+      promotionPrice: '$350',
+      validUntil: t('common.validUntil') + ' April 10, 2024',
+      image: 'https://images.unsplash.com/photo-1593260853607-d0e0f639bdab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBiZWF1dHklMjBtb2RlbCUyMHNraW5jYXJlfGVufDF8fHx8MTc1NjEwNjEyOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      description: t('event.promo7.desc'),
+      includes: ['Deep Hydration Mask', 'Moisturizing Serum', 'Elasticity Treatment', 'Home Care Guide']
     }
   ];
 
@@ -135,13 +114,12 @@ export default function EventPage() {
     <PageLayout letter="P" letterPosition="top-left">
       <div className="max-w-7xl px-6 py-8 mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-5xl mb-6 text-gray-800">Special Promotions</h1>
+          <h1 className="text-5xl mb-6 text-gray-800">{t('event.title')}</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Exclusive K-beauty offers for international clients at SoRa Clinic. 
-            Experience premium Korean beauty treatments with special discounted rates.
+            {t('event.subtitle')}
           </p>
           <div className="mt-6 inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-medium">
-            ⚡ Limited Time Offers - Book Your Beauty Transformation Now!
+            ⚡ {t('common.bookNow')} - {t('common.learnMore')}!
           </div>
         </div>
 
@@ -208,7 +186,7 @@ export default function EventPage() {
                 </p>
 
                 <div className="space-y-2">
-                  <div className="text-xs text-gray-500 font-medium">INCLUDES:</div>
+                  <div className="text-xs text-gray-500 font-medium">{t('common.includes')}:</div>
                   <div className="flex flex-wrap gap-1">
                     {item.includes.slice(0, 2).map((include, index) => (
                       <span key={index} className="text-xs bg-pink-50 text-pink-700 px-2 py-1 rounded">

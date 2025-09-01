@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { MapPin, Mail, Phone } from "lucide-react";
-import { OPENING_HOURS, CONTACT_INFO } from "./constants/contactData";
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { toast } from 'sonner@2.0.3';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ContactForm {
   name: string;
@@ -17,6 +17,7 @@ interface ContactForm {
 }
 
 export default function ContactInfo() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<ContactForm>({
     name: '',
     email: '',
@@ -80,6 +81,17 @@ export default function ContactInfo() {
     }
   };
 
+  const openingHours = [
+    {
+      days: t('contact.hours.monFri'),
+      hours: t('contact.hours.monFriTime')
+    },
+    {
+      days: t('contact.hours.saturday'),
+      hours: t('contact.hours.saturdayTime')
+    }
+  ];
+
   return (
     <div className="space-y-8">
       {/* Contact Info Card */}
@@ -87,10 +99,10 @@ export default function ContactInfo() {
         {/* Opening Hours */}
         <div className="mb-8">
           <h3 className="text-2xl font-semibold text-gray-700 mb-6">
-            Opening hours
+            {t('contact.hours')}
           </h3>
           <div className="space-y-4">
-            {OPENING_HOURS.map((schedule, index) => (
+            {openingHours.map((schedule, index) => (
               <div key={index} className="flex justify-between items-center">
                 <span className="text-gray-600">
                   {schedule.days}
@@ -106,7 +118,7 @@ export default function ContactInfo() {
         {/* Visit Message */}
         <div className="mb-8">
           <p className="text-gray-500 leading-relaxed">
-            {CONTACT_INFO.visitMessage}
+            {t('contact.visitMessage')}
           </p>
         </div>
 
@@ -118,7 +130,7 @@ export default function ContactInfo() {
             </div>
             <div>
               <p className="text-gray-600">
-                {CONTACT_INFO.address}
+                {t('contact.address')}
               </p>
             </div>
           </div>
@@ -129,7 +141,7 @@ export default function ContactInfo() {
             </div>
             <div>
               <p className="text-gray-600">
-                {CONTACT_INFO.email}
+                {t('contact.email')}
               </p>
             </div>
           </div>
@@ -140,7 +152,7 @@ export default function ContactInfo() {
             </div>
             <div>
               <p className="text-gray-600">
-                {CONTACT_INFO.phone}
+                {t('contact.phone')}
               </p>
             </div>
           </div>

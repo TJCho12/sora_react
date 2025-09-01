@@ -1,26 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Globe } from 'lucide-react';
-
-interface Language {
-  code: string;
-  name: string;
-  flag: string;
-}
-
-const languages: Language[] = [
-  { code: 'KR', name: '한국어', flag: '🇰🇷' },
-  { code: 'EN', name: 'English', flag: '🇺🇸' },
-  { code: 'CH', name: '中文', flag: '🇨🇳' },
-  { code: 'JP', name: '日本語', flag: '🇯🇵' }
-];
+import { useLanguage, languages } from '../contexts/LanguageContext';
 
 export default function LanguageSelector() {
-  const [selectedLanguage, setSelectedLanguage] = useState<Language>(languages[0]);
+  const { currentLanguage, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleLanguageChange = (language: Language) => {
-    setSelectedLanguage(language);
+  const handleLanguageChange = (language: typeof languages[0]) => {
+    setLanguage(language);
     setIsOpen(false);
   };
 
@@ -33,7 +21,7 @@ export default function LanguageSelector() {
           <Globe className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
           {/* Small badge showing current language */}
           <div className="absolute -top-1 -right-1 bg-pink-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm">
-            {selectedLanguage.code.charAt(0)}
+            {currentLanguage.code.charAt(0)}
           </div>
         </button>
       </PopoverTrigger>
@@ -49,7 +37,7 @@ export default function LanguageSelector() {
               key={language.code}
               onClick={() => handleLanguageChange(language)}
               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
-                selectedLanguage.code === language.code
+                currentLanguage.code === language.code
                   ? 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-600 shadow-sm'
                   : 'hover:bg-gray-50 text-gray-700 hover:text-pink-500'
               }`}
@@ -58,14 +46,14 @@ export default function LanguageSelector() {
               <div className="flex-1">
                 <div className="font-medium">{language.code}</div>
                 <div className={`text-sm ${
-                  selectedLanguage.code === language.code 
+                  currentLanguage.code === language.code 
                     ? 'text-pink-500' 
                     : 'text-gray-500'
                 }`}>
                   {language.name}
                 </div>
               </div>
-              {selectedLanguage.code === language.code && (
+              {currentLanguage.code === language.code && (
                 <svg className="w-4 h-4 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -78,7 +66,7 @@ export default function LanguageSelector() {
         <div className="mt-3 pt-2 border-t border-pink-100/60">
           <div className="flex items-center justify-center space-x-2 text-xs text-gray-400 px-2">
             <Globe className="w-3 h-3" />
-            <span>Select Language</span>
+            <span>{t('language.select')}</span>
           </div>
         </div>
       </PopoverContent>

@@ -1,4 +1,7 @@
+import { useLanguage } from '../contexts/LanguageContext';
+
 export default function Footer() {
+  const { t } = useLanguage();
 
   return (
     <footer className="bg-white border-t border-[#0ABAB5]/30">
@@ -8,7 +11,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-600 text-sm">
-            © 2024 SoRa Clinic. All rights reserved.
+            {t('footer.copyright')}
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-600 hover:text-[#0ABAB5] text-sm transition-colors duration-300">

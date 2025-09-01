@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { slides, SlideType } from "./constants/slidesData";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface BeautyCarouselProps {
   onNavigateToTreatments: () => void;
 }
 
 export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouselProps) {
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const nextSlide = () => {
@@ -169,7 +171,7 @@ export default function BeautyCarousel({ onNavigateToTreatments }: BeautyCarouse
                       }}
                       className="mt-3 md:mt-6 bg-white/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-full text-pink-500 md:hover:bg-white md:hover:text-pink-600 transition-all duration-300 font-medium opacity-0 md:group-hover:opacity-100 transform translate-y-4 md:group-hover:translate-y-0 border border-pink-200/50 shadow-sm text-sm md:text-base"
                     >
-                      Learn More
+                      {t('home.hero.bookNow')}
                     </button>
                   </div>
 

@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import { useState } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface NavigationProps {
   currentPage: string;
@@ -21,6 +22,7 @@ export default function Navigation({
   setCurrentPage,
   onBookNow,
 }: NavigationProps) {
+  const { t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] =
     useState(false);
 
@@ -101,46 +103,46 @@ export default function Navigation({
         </button>
 
         {/* Center - Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8 px-[15px] py-[18px]">
+        <nav className="hidden md:flex items-center space-x-8">
           <button
             onClick={() => handleNavigation("event")}
             className={`transition-all duration-300 font-medium hover:scale-110 ${
               currentPage === "event"
-                ? "text-gray-700 hover:text-pink-500 border-b-2 border-pink-400 pb-1"
+                ? "text-[#0ABAB5] hover:text-pink-500 border-b-2 border-[#0ABAB5] pb-1"
                 : "text-gray-600 hover:text-pink-500"
             }`}
           >
-            EVENTS
+            {t('nav.event')}
           </button>
           <button
             onClick={() => handleNavigation("about")}
             className={`transition-all duration-300 font-medium hover:scale-110 ${
               currentPage === "about"
-                ? "text-gray-700 hover:text-pink-500 border-b-2 border-pink-400 pb-1"
+                ? "text-[#0ABAB5] hover:text-pink-500 border-b-2 border-[#0ABAB5] pb-1"
                 : "text-gray-600 hover:text-pink-500"
             }`}
           >
-            ABOUT 
+            {t('nav.about')}
           </button>
           <button
             onClick={() => handleNavigation("treatments")}
             className={`transition-all duration-300 font-medium hover:scale-110 ${
               currentPage === "treatments"
-                ? "text-gray-700 hover:text-pink-500 border-b-2 border-pink-400 pb-1"
+                ? "text-[#0ABAB5] hover:text-pink-500 border-b-2 border-[#0ABAB5] pb-1"
                 : "text-gray-600 hover:text-pink-500"
             }`}
           >
-            TREATMENTS
+            {t('nav.treatments')}
           </button>
           <button
             onClick={() => handleNavigation("contacts")}
             className={`transition-all duration-300 font-medium hover:scale-110 ${
               currentPage === "contacts"
-                ? "text-gray-700 hover:text-pink-500 border-b-2 border-pink-400 pb-1"
+                ? "text-[#0ABAB5] hover:text-pink-500 border-b-2 border-[#0ABAB5] pb-1"
                 : "text-gray-600 hover:text-pink-500"
             }`}
           >
-            CONTACT
+            {t('nav.contact')}
           </button>
         </nav>
 
@@ -155,7 +157,7 @@ export default function Navigation({
               onClick={handleBookNow}
               className="bg-gradient-to-r from-pink-400 via-[#0ABAB5] to-purple-400 hover:from-pink-500 hover:via-[#0ABAB5]/90 hover:to-purple-500 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              BOOK
+              {t('nav.book')}
             </Button>
           </div>
 
@@ -168,7 +170,7 @@ export default function Navigation({
                 : "text-[#0ABAB5] hover:text-pink-500"
             }`}
           >
-            DASHBOARD
+            {t('nav.dashboard')}
           </button>
 
           {/* Mobile menu button - ONLY THIS HOVER CHANGED */}
@@ -214,7 +216,7 @@ export default function Navigation({
                         : "text-gray-600 hover:text-pink-500 hover:bg-white"
                     }`}
                   >
-                    EVENT
+                    {t('nav.event')}
                   </button>
                   <button
                     onClick={() => handleNavigation("about")}
@@ -224,7 +226,7 @@ export default function Navigation({
                         : "text-gray-600 hover:text-pink-500 hover:bg-white"
                     }`}
                   >
-                    ABOUT
+                    {t('nav.about')}
                   </button>
                   <button
                     onClick={() =>
@@ -236,7 +238,7 @@ export default function Navigation({
                         : "text-gray-600 hover:text-pink-500 hover:bg-white"
                     }`}
                   >
-                    TREATMENTS
+                    {t('nav.treatments')}
                   </button>
                   <button
                     onClick={() => handleNavigation("contacts")}
@@ -246,33 +248,37 @@ export default function Navigation({
                         : "text-gray-600 hover:text-pink-500 hover:bg-white"
                     }`}
                   >
-                    CONTACT
+                    {t('nav.contact')}
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("services")}
+                    className="text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 text-gray-600 hover:text-pink-500 hover:bg-white"
+                  >
+                    {t('nav.services')}
                   </button>
                 </div>
 
                 {/* Mobile Book Button */}
-                <div className="pt-6 border-t border-pink-100">
-                  <div className="px-4">
-                    <Button
-                      onClick={handleBookNow}
-                      className="w-full bg-gradient-to-r from-pink-400 via-[#0ABAB5] to-purple-400 hover:from-pink-500 hover:via-[#0ABAB5]/90 hover:to-purple-500 text-white py-3 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
-                    >
-                      BOOK
-                    </Button>
-                  </div>
+                <div className="pt-4">
+                  <Button
+                    onClick={handleBookNow}
+                    className="w-full bg-gradient-to-r from-pink-400 via-[#0ABAB5] to-purple-400 hover:from-pink-500 hover:via-[#0ABAB5]/90 hover:to-purple-500 text-white py-3 rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    {t('nav.book')}
+                  </Button>
                 </div>
 
-                {/* Dashboard Section - Separated at bottom */}
-                <div className="pt-4 border-t border-gray-200">
+                {/* Mobile Dashboard Button */}
+                <div className="pt-2">
                   <button
                     onClick={() => handleNavigation("dashboard-preview")}
-                    className={`text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 w-full ${
+                    className={`w-full text-left py-3 px-4 rounded-xl transition-all duration-300 font-medium hover:scale-105 ${
                       currentPage === "dashboard-preview"
-                        ? "bg-[#0ABAB5]/10 text-[#0ABAB5] border-l-4 border-[#0ABAB5]"
-                        : "text-[#0ABAB5] hover:text-[#0ABAB5]/80 hover:bg-[#0ABAB5]/5"
+                        ? "bg-white text-[#0ABAB5] border-l-4 border-[#0ABAB5]"
+                        : "text-[#0ABAB5] hover:text-pink-500 hover:bg-white"
                     }`}
                   >
-                    📊 DASHBOARD
+                    {t('nav.dashboard')}
                   </button>
                 </div>
               </div>

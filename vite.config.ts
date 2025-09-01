@@ -53,10 +53,13 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',  // 또는 build
+      emptyOutDir: true,
     },
+    base: './', // Vercel에서 상대 경로 사용
     server: {
       port: 3000,
       open: true,
     },
   });
+  

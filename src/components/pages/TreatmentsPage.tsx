@@ -2,13 +2,16 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { Card, CardContent } from '../ui/card';
 import { Button } from '../ui/button';
 import PageLayout from '../PageLayout';
+import { useLanguage } from '../../contexts/LanguageContext';
 
 export default function TreatmentsPage() {
+  const { t } = useLanguage();
+
   const blogPosts = [
     {
       id: 1,
-      title: 'The Ultimate K-Beauty Routine: 10 Steps to Glass Skin',
-      excerpt: 'Discover the secrets of Korean skincare with our comprehensive guide to achieving that coveted glass skin glow through traditional K-beauty methods.',
+      title: t('treatments.post1.title'),
+      excerpt: t('treatments.post1.excerpt'),
       image: 'https://images.unsplash.com/photo-1559185590-765cdc663325?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxrb3JlYW4lMjBza2luY2FyZSUyMHJvdXRpbmUlMjBzdGVwc3xlbnwxfHx8fDE3NTYwODY2MDF8MA&ixlib=rb-4.1.0&q=80&w=1080',
       author: 'Dr. Sora Kim',
       date: 'December 20, 2024',
@@ -16,8 +19,8 @@ export default function TreatmentsPage() {
     },
     {
       id: 2,
-      title: 'Glass Skin vs. Dewy Skin: Understanding the Difference',
-      excerpt: 'Learn about the nuances between glass skin and dewy skin, and discover which Korean beauty trend is right for your skin type and goals.',
+      title: t('treatments.post2.title'),
+      excerpt: t('treatments.post2.excerpt'),
       image: 'https://images.unsplash.com/photo-1588192069224-b7c4ee7ed5af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnbGFzcyUyMHNraW4lMjBiZWF1dHklMjB0cmVhdG1lbnR8ZW58MXx8fHwxNzU2MDg2NjA1fDA&ixlib=rb-4.1.0&q=80&w=1080',
       author: 'Dr. Min-Jung Lee',
       date: 'December 18, 2024',
@@ -25,8 +28,8 @@ export default function TreatmentsPage() {
     },
     {
       id: 3,
-      title: 'Hydration Heroes: Best Korean Ingredients for Dry Skin',
-      excerpt: 'Explore the most effective Korean skincare ingredients for deep hydration, from hyaluronic acid to snail mucin and beyond.',
+      title: t('treatments.post3.title'),
+      excerpt: t('treatments.post3.excerpt'),
       image: 'https://images.unsplash.com/photo-1748390359572-8e7a47bf5cb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoeWRyYXRpbmclMjBmYWNlJTIwbWFzayUyMGJlYXV0eXxlbnwxfHx8fDE3NTYwODY2MTB8MA&ixlib=rb-4.1.0&q=80&w=1080',
       author: 'Ji-Woo Park',
       date: 'December 15, 2024',
@@ -34,8 +37,8 @@ export default function TreatmentsPage() {
     },
     {
       id: 4,
-      title: 'Seasonal Skincare: Adapting Your K-Beauty Routine',
-      excerpt: 'Learn how to modify your Korean skincare routine throughout the year to maintain healthy, glowing skin in every season.',
+      title: t('treatments.post4.title'),
+      excerpt: t('treatments.post4.excerpt'),
       image: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=400&h=250&fit=crop',
       author: 'Hye-Jin Choi',
       date: 'December 12, 2024',
@@ -43,8 +46,8 @@ export default function TreatmentsPage() {
     },
     {
       id: 5,
-      title: 'The Science Behind K-Beauty: Why Korean Skincare Works',
-      excerpt: 'Dive deep into the scientific principles that make Korean skincare so effective, from ingredient innovation to layering techniques.',
+      title: t('treatments.post5.title'),
+      excerpt: t('treatments.post5.excerpt'),
       image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop',
       author: 'Dr. Sora Kim',
       date: 'December 10, 2024',
@@ -52,8 +55,8 @@ export default function TreatmentsPage() {
     },
     {
       id: 6,
-      title: 'Anti-Aging with K-Beauty: Preventive vs. Corrective Care',
-      excerpt: 'Understand the Korean approach to anti-aging skincare and learn how to prevent signs of aging while treating existing concerns.',
+      title: t('treatments.post6.title'),
+      excerpt: t('treatments.post6.excerpt'),
       image: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=400&h=250&fit=crop',
       author: 'Dr. Min-Jung Lee',
       date: 'December 8, 2024',
@@ -65,9 +68,9 @@ export default function TreatmentsPage() {
     <PageLayout letter="T" letterPosition="top-right">
       <div className="max-w-6xl mx-auto py-8 px-[0px] mx-[30px] my-[0px] px-[20px] py-[28px]">
         <div className="text-center mb-10">
-          <h1 className="text-5xl mb-6 text-gray-800">Treatments</h1>
+          <h1 className="text-5xl mb-6 text-gray-800">{t('treatments.title')}</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Expert K-beauty treatments, skincare solutions, and professional services from our SoRa Clinic specialists
+            {t('treatments.subtitle')}
           </p>
         </div>
 
@@ -99,25 +102,21 @@ export default function TreatmentsPage() {
                 <span className="inline-block px-3 py-1 bg-gradient-to-r from-[#0ABAB5]/10 to-pink-400/10 text-[#0ABAB5] rounded-full text-sm mb-4">
                   {post.category}
                 </span>
-                <h3 className="text-xl mb-3 text-gray-800 group-hover:text-[#0ABAB5] transition-colors duration-300 font-semibold leading-tight">
+                <h3 className="text-xl font-semibold text-gray-800 mb-3 line-clamp-2 group-hover:text-[#0ABAB5] transition-colors duration-300">
                   {post.title}
                 </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">{post.excerpt}</p>
-                <Button variant="ghost" className="text-[#0ABAB5] hover:text-white hover:bg-[#0ABAB5] p-3 rounded-full transition-all duration-300 font-medium">
-                  Read More
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/>
-                  </svg>
+                <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                  {post.excerpt}
+                </p>
+                <Button 
+                  className="w-full bg-gradient-to-r from-[#0ABAB5] to-pink-400 hover:from-[#0ABAB5]/90 hover:to-pink-400/90 text-white transition-all duration-300"
+                >
+                  {t('common.readMore')}
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
-
-        {/* Featured Section */}
-        <section className="mt-20">
-
-        </section>
       </div>
     </PageLayout>
   );

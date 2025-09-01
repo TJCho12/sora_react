@@ -9,6 +9,7 @@ import { Calendar } from './ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import { toast } from 'sonner@2.0.3';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -30,6 +31,7 @@ interface BookingForm {
 }
 
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<BookingForm>({
     name: '',
     email: '',
@@ -172,7 +174,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
   };
 
   const formatDate = (date: Date | undefined) => {
-    if (!date) return "Select date";
+    if (!date) return t('booking.date');
     return date.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
@@ -206,7 +208,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             <DialogTitle 
               className="text-3xl font-bold text-gray-800 mb-2"
             >
-              Book Your <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">SoRa</span> Experience
+              {t('booking.title')} <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">SoRa</span>
             </DialogTitle>
             <DialogDescription 
               className="text-gray-600 text-base leading-relaxed"
@@ -228,7 +230,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name" className="text-gray-700 font-medium">Full Name *</Label>
+                  <Label htmlFor="name" className="text-gray-700 font-medium">{t('booking.name')} *</Label>
                   <Input
                     id="name"
                     type="text"
@@ -241,7 +243,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-700 font-medium">Email Address *</Label>
+                  <Label htmlFor="email" className="text-gray-700 font-medium">{t('booking.email')} *</Label>
                   <Input
                     id="email"
                     type="email"
@@ -255,7 +257,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-gray-700 font-medium">Phone Number *</Label>
+                <Label htmlFor="phone" className="text-gray-700 font-medium">{t('booking.phone')} *</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -278,7 +280,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
               </h3>
               
               <div className="space-y-2">
-                <Label className="text-gray-700 font-medium">Preferred Treatment *</Label>
+                <Label className="text-gray-700 font-medium">{t('booking.service')} *</Label>
                 <Select value={formData.treatmentType} onValueChange={(value) => handleInputChange('treatmentType', value)}>
                   <SelectTrigger className="bg-white border-purple-200 text-gray-800 focus:border-purple-400 focus:ring-purple-400/20">
                     <SelectValue placeholder="Select your desired treatment" />
@@ -295,7 +297,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-gray-700 font-medium">Preferred Date</Label>
+                  <Label className="text-gray-700 font-medium">{t('booking.date')}</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -322,7 +324,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-gray-700 font-medium">Preferred Time</Label>
+                  <Label className="text-gray-700 font-medium">{t('booking.time')}</Label>
                   <Select value={formData.timeSlot} onValueChange={(value) => handleInputChange('timeSlot', value)}>
                     <SelectTrigger className="bg-white border-purple-200 text-gray-800 focus:border-purple-400 focus:ring-purple-400/20">
                       <SelectValue placeholder="Select time slot" />
@@ -368,7 +370,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                 <div className="space-y-2">
                   <Label className="text-gray-700 font-medium">Primary Skin Concerns</Label>
                   <Select value={formData.skinConcerns} onValueChange={(value) => handleInputChange('skinConcerns', value)}>
-                    <SelectTrigger className="bg-white border-teal-200 text-gray-800 focus:border-teal-400 focus:ring-teal-400/20">
+                    <SelectTrigger className="bg-white border-teal-200 text-gray-800 focus:border-purple-400 focus:ring-purple-400/20">
                       <SelectValue placeholder="Select your main concern" />
                     </SelectTrigger>
                     <SelectContent className="bg-white border-teal-200 text-gray-800">
@@ -437,7 +439,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     <span>Booking...</span>
                   </div>
                 ) : (
-                  'Book Appointment'
+                  t('booking.submit')
                 )}
               </Button>
             </div>
